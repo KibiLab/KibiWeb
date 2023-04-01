@@ -1,6 +1,15 @@
+<script>
+  import KibiButton from '$lib/components/KibiButton.svelte';
+
+</script>
+
 <h1 class="text-5xl py-8 px-8 font-bold">
   Hello world!	
 </h1>
+
+<div class="px-10 py-10">
+  <KibiButton />
+</div>
 <button class="btn btn-secondary ml-8">Click Me!</button>
 <button class="btn btn-primary">Submit</button>
 <div class="py-4 pl-8">
