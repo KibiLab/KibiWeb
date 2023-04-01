@@ -1,36 +1,56 @@
 <script>
-  import KibiButton from '$lib/components/KibiButton.svelte';
+  let components = [
+    {id:'button', mainStyle:'btn btn-primary', customStyle:'color:red !important', content:"Click me!"}, 
+    {id:'div', mainStyle:'px-10 py-10 bg-slate-300', customStyle:'color:red !important', content:"Hello World from div"}
+  ];
+
+	function addComponent() {
+		components = [...components, {id:'button', mainStyle:'btn btn-primary', customStyle:'color:red !important', content:"Add me!"}];
+	}
+
+  export let tempVar;
+  export let Warning;
+  function checkEmpty() {
+    Warning = 'Change fired!'
+    
+    if(tempVar == ''){
+      tempVar = '&nbsp';
+    }
+	}
+
+ 
+  $: {
+    console.log(tempVar);
+  }
 
 </script>
 
 <h1 class="text-5xl py-8 px-8 font-bold">
   Hello world!	
 </h1>
-
-<div class="px-10 py-10">
-  <KibiButton />
+<div class="px-10">
+  <button class="btn btn-primary" on:click={addComponent}>
+    Add a component
+  </button>
 </div>
-<button class="btn btn-secondary ml-8">Click Me!</button>
-<button class="btn btn-primary">Submit</button>
-<div class="py-4 pl-8">
-  <ul class="menu bg-gray-100 w-56 p-2 rounded-box">
-    <li>
-      <a>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
-      Item 2
-      </a>
-    </li>
-    <li>
-      <a>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-        Item 1
-      </a>
-    </li>
-    <li>
-      <a>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-        Item 3
-      </a>
-    </li>
+
+<h1 class="text-3xl py-8 px-8 font-bold">{tempVar}</h1>
+<div class="px-10">
+  <ul>
+    {#each components as { id, mainStyle, customStyle, content }, i }
+      <li>{i+1}: {id} - mainStyle: {mainStyle} - customStyle: {customStyle}</li>
+      {#if id == 'button'}
+        <button class="{mainStyle}" style="{customStyle}">                   
+          <div contenteditable="true" bind:innerHTML={tempVar} on:keypress={checkEmpty}>{content}</div>
+        </button>
+      {/if}
+
+      {#if id == 'div'}
+        <div class="{mainStyle}"  style="{customStyle}" contenteditable="true">
+          {content}
+        </div>
+      {/if}
+    {/each}
   </ul>
 </div>
+<p>{Warning}</p>
