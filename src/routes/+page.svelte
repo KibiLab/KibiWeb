@@ -17,24 +17,20 @@
       tempVar = '&nbsp';
     }
 	}
-
  
   $: {
     console.log(tempVar);
   }
 
 </script>
-
-<h1 class="text-5xl py-8 px-8 font-bold">
-  Hello world!	
-</h1>
-<div class="px-10">
+<div class="px-10 py-10">
   <button class="btn btn-primary" on:click={addComponent}>
     Add a component
   </button>
 </div>
 
 <h1 class="text-3xl py-8 px-8 font-bold">{tempVar}</h1>
+
 <div class="px-10">
   <ul>
     {#each components as { id, mainStyle, customStyle, content }, i }
