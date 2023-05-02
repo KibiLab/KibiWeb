@@ -24,5 +24,9 @@ if(page[1].s2){
 </script>
 <div class="px-10 py-10">  
   <h1 class="text-3xl py-8 px-8 font-bold">Hello World!</h1>
-  {page[0].s1}
+  <p>{page[0].s1.type}</p>
+  <p>{page[0].s1.include}</p>
+  <p>{page[0].s1.contain}</p>
+  <p>{page[0].s1.px}</p>
+  <p>{page[0].s1.py}</p>
 </div>
