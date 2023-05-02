@@ -1,52 +1,28 @@
 <script>
-  let components = [
-    {id:'button', mainStyle:'btn btn-primary', customStyle:'color:red !important', content:"Click me!"}, 
-    {id:'div', mainStyle:'px-10 py-10 bg-slate-300', customStyle:'color:red !important', content:"Hello World from div"}
-  ];
+let page = [
+  {"s1":{
+    "type":"div",
+    "include":"abc ksjd fkj kfj kdf",
+    "contain":"s1_1 s1_2 s1_3",
+    "px":"px-10",
+    "py":"py-10",
+  }},
+  {"s2":{
+    "type":"img",
+    "include":"abc ksjd fkj kfj kdf",
+    "contain":"s1_1 s1_2 s1_3",
+    "px":"px-10",
+    "py":"py-10",
+  }}
+]
 
-	function addComponent() {
-		components = [...components, {id:'button', mainStyle:'btn btn-primary', customStyle:'color:red !important', content:"Add me!"}];
-	}
-
-  export let tempVar;
-  export let Warning;
-  function checkEmpty() {
-    Warning = 'Change fired!'
-    
-    if(tempVar == ''){
-      tempVar = '&nbsp';
-    }
-	}
- 
-  $: {
-    console.log(tempVar);
-  }
-
+console.log(page[0]);
+console.log(page[0].s1);
+if(page[1].s2){
+  console.log(page[1].s2.type);
+}
 </script>
-<div class="px-10 py-10">
-  <button class="btn btn-primary" on:click={addComponent}>
-    Add a component
-  </button>
+<div class="px-10 py-10">  
+  <h1 class="text-3xl py-8 px-8 font-bold">Hello World!</h1>
+  {page[0].s1}
 </div>
-
-<h1 class="text-3xl py-8 px-8 font-bold">{tempVar}</h1>
-
-<div class="px-10">
-  <ul>
-    {#each components as { id, mainStyle, customStyle, content }, i }
-      <li>{i+1}: {id} - mainStyle: {mainStyle} - customStyle: {customStyle}</li>
-      {#if id == 'button'}
-        <button class="{mainStyle}" style="{customStyle}">                   
-          <div contenteditable="true" bind:innerHTML={tempVar} on:keypress={checkEmpty}>{content}</div>
-        </button>
-      {/if}
-
-      {#if id == 'div'}
-        <div class="{mainStyle}"  style="{customStyle}" contenteditable="true">
-          {content}
-        </div>
-      {/if}
-    {/each}
-  </ul>
-</div>
-<p>{Warning}</p>
